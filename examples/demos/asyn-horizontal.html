@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+	<title>横向，异步构建</title>
+
+<link rel="stylesheet" href="http://style.aliunicorn.com/css/6v/apollo/core/core-ws.css?t=0_0" />
+<link rel="stylesheet" href="http://style.aliunicorn.com/css/6v/apollo/mod/assets/cost/cost-ws.css?t=0_0" />
+<link rel="stylesheet" href="http://style.aliunicorn.com/css/6v/apollo/mod/assets/slidebox/slidebox-ws.css?t=0_0" />
+<style>
+body{padding:10px 15px;}
+</style>
+<!-- CODE START css
+#requireCSS("6v/apollo/mod/assets/cost/cost-ws.css")
+#requireCSS("6v/apollo/mod/assets/slidebox/slidebox-ws.css")
+CODE END -->
+
+	<script src="http://style.aliunicorn.com/js/6v/atom/atom-ws.js?t=0_0"></script>
+	<!--[if lt IE 9]>
+	<script src="../static/js/html5shiv.js"></script>
+	<![endif]-->
+</head>
+<body>
+
+<!-- CODE START html 放置 Slidebox 的父节点 -->
+<div id="slidebox"></div>
+<!-- CODE END html -->
+
+<script>
+<!-- CODE START javascript <code>parentNode</code> 是父节点，<code>dataSource</code> 是异步请求及相关处理。 -->
+seajs.use(['$', 'js/6v/lib/icbu/slidebox/slidebox-complex.js?t=0_0'], function($, SlideboxComplex) {
+	new SlideboxComplex({
+		parentNode: '#slidebox',
+		dataSource: function(value, done) {
+			var that = this;
+
+			// 异步请求
+			$.ajax('../data-source.json', {
+				dataType: 'json'
+
+			// 请求成功，加工数据，拼接 items 作为商品数据数组
+			}).success(function(xhr) {
+				var data = xhr.productlist['2056'];
+				var items = [];
+				for(var i=0,len=data.length; i<len; i++) {
+					var description = data[i].subject;
+					var title = description;
+					if(description.length > 33) {
+						title = title.substring(0, 30) + '...'
+					}
+					var item = {
+						title: title,
+						url: data[i].detail_url,
+						image: data[i].img_url,
+						description: description,
+						price: data[i].currency_symbol + data[i].min_product_price,
+						unit: data[i].product_unit
+					};
+					items.push(item);
+				}
+				done(items);
+			});
+			return false;
+		}
+	}).render();
+});
+<!-- CODE END -->
+</script>
+
+</body>
+</html>

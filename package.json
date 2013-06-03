@@ -1,0 +1,26 @@
+{
+    "name": "slidebox",
+    "version": "1.0.5",
+    "root": "icbu",
+    "description": "Slidebox 提供了列表切换的动画效果，适合横向纵向、无限循环、自动循环等场景。可以通过请求数据的方式构建 Slidebox 提供了列表切换的动画效果。",
+    "homepage": "",
+    "author": "吴钊",
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "bugs": {
+        "url": ""
+    },
+    "license": "MIT",
+    "dependencies": {
+        "$": "$",
+        "widget": "lib/arale/widget/widget",
+		"templatable": "lib/arale/widget/templatable.js"
+    },
+    "tests": ["slidebox", "slidebox-complex"],
+    "output": {
+        "slidebox.js": ".",
+        "slidebox-complex.js": "."
+    }
+}
