@@ -4,7 +4,7 @@
 
 Slidebox 提供了列表切换的动画效果，适合横向纵向、无限循环、自动循环等场景。运行于 [AraleJS](https://github.com/aralejs) 框架。
 
-[API 文档](http://arale.alizoo.com/slidebox/) | [Demo 示例](http://arale.alizoo.com/slidebox/examples/)
+[Demo 示例](http://arale.alizoo.com/slidebox/examples/)
 
 ---
 
